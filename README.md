@@ -33,6 +33,7 @@ before project assembly.
 Default keypad output pin is 8, which is defined by `KBD_PIN` constant in `main.cpp`.
 
 **Layout**
+
 In this project, I used 8x8 keypad grid.
 Keypad button values are defined at [`/include/keypad.h`](/include/keypad.h).
 
