@@ -7,6 +7,8 @@
 
 #define KBD_PIN 8
 
+unsigned long volatile previousMillis = 0;
+
 // Predefine functions
 bool isRecoveryMode();
 void onKeyDown();
@@ -30,13 +32,16 @@ void setup() {
 void loop() {}
 
 void onKeyDown() {
-    key keyNumber = readKey(KBD_PIN);
-    if (keyNumber == MDKEY_EMPTY) return;
-    Serial.println(keyNumber);
-    return;
-    if (keyNumber == MDKEY_EMPTY) {
+    // Get rid of button noise by event interval check.
+    // Can also be done with a capacitor.
+    unsigned long now = millis();
+    if ((now - previousMillis) < 200) {
         return;
     }
+    previousMillis = now;
+
+    key keyNumber = readKey(KBD_PIN);
+    if (keyNumber == MDKEY_EMPTY) return;
 
     // Define your keys here
     switch (keyNumber) {
@@ -47,7 +52,7 @@ void onKeyDown() {
         Keyboard.releaseAll();
         break;
       case MDKEY_2:
-        Keyboard.println("Hello World yobta!");
+        Keyboard.println("Hello World!");
         break;
       case MDKEY_3:
         Consumer.write(MEDIA_PLAY_PAUSE);
