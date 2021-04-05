@@ -1,4 +1,3 @@
-// Define board type (Arduino Pro Micro in my case)
 #include "EnableInterrupt.h"
 #include "HID-Project.h"
 #include "keypad.h"
@@ -6,6 +5,7 @@
 #include <Arduino.h>
 
 
+// Keypad pin number
 #define KBD_PIN 8
 
 unsigned long volatile previousMillis = 0;
