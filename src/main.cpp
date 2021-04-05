@@ -1,9 +1,10 @@
 // Define board type (Arduino Pro Micro in my case)
-#include <Arduino.h>
 #include "EnableInterrupt.h"
 #include "HID-Project.h"
 #include "keypad.h"
 #include "recovery.h"
+#include <Arduino.h>
+
 
 #define KBD_PIN 8
 
@@ -20,7 +21,7 @@ void setup() {
 
     pinMode(KBD_PIN, INPUT_PULLUP);
     enableInterrupt(KBD_PIN, onKeyDown, CHANGE);
-    
+
     // Enable generic keyboard interface
     Keyboard.begin();
 
@@ -41,35 +42,39 @@ void onKeyDown() {
     previousMillis = now;
 
     key keyNumber = readKey(KBD_PIN);
-    if (keyNumber == MDKEY_EMPTY) return;
+    if (keyNumber == MDKEY_EMPTY)
+        return;
 
     // Define your keys here
     switch (keyNumber) {
-      case MDKEY_1:
+    case MDKEY_1:
         Keyboard.add(KEY_LEFT_SHIFT);
         Keyboard.add(KEY_LEFT_ALT);
         Keyboard.send();
         Keyboard.releaseAll();
         break;
-      case MDKEY_2:
+    case MDKEY_2:
         Keyboard.println("Hello World!");
         break;
-      case MDKEY_3:
+    case MDKEY_3:
         Consumer.write(MEDIA_PLAY_PAUSE);
         break;
-      case MDKEY_8:
+    case MDKEY_8:
         Consumer.write(MEDIA_VOL_DOWN);
         break;
-      case MDKEY_4:
+    case MDKEY_4:
         Consumer.write(MEDIA_VOLUME_UP);
         break;
-      case MDKEY_12:
+    case MDKEY_12:
         Consumer.write(MEDIA_PREV);
         break;
-      case MDKEY_16:
+    case MDKEY_13:
+        Keyboard.println("if err != nil {\n\treturn nil, err\n}");
+        break;
+    case MDKEY_16:
         Consumer.write(MEDIA_NEXT);
         break;
-      default:
+    default:
         Serial.print("Unknown Key: ");
         Serial.println(keyNumber);
         break;
