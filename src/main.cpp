@@ -31,7 +31,10 @@ void loop() {}
 
 void onKeyDown() {
     key keyNumber = readKey(KBD_PIN);
-    if (keyNumber == MDKEY_LOW) {
+    if (keyNumber == MDKEY_EMPTY) return;
+    Serial.println(keyNumber);
+    return;
+    if (keyNumber == MDKEY_EMPTY) {
         return;
     }
 
