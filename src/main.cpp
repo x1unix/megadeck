@@ -2,7 +2,7 @@
 #include "EnableInterrupt.h"
 #include "keypad.h"
 #include <Arduino.h>
-#include <Keyboard.h>
+#include "HID-Project.h"
 
 #define KBD_PIN 8
 #define RESET_PIN 2
@@ -17,7 +17,7 @@ void setup() {
     pinMode(RESET_PIN, INPUT_PULLUP);
     enableInterrupt(KBD_PIN, onKeyDown, CHANGE);
     enableInterrupt(RESET_PIN, reset, CHANGE);
-    Keyboard.begin();
+    //Keyboard.begin();
 }
 
 void loop() {}
@@ -43,6 +43,7 @@ void onKeyDown() {
         Keyboard.print("test");
         break;
       case MDKEY_2:
+        Keyboard.press(MEDIA_PLAY_PAUSE);
         break;
       default:
         Serial.print("Unknown Key: ");
