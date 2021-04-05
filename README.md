@@ -1,6 +1,8 @@
 # MegaDeck
 > Custom StreamDeck-like clone using Arduino Pro Micro and RobotDyn keypad
 
+![Preview](images/preview.jpg)
+
 Configurable keypad that allows to assign custom macros to specified keys, like:
 
 * Type a text
