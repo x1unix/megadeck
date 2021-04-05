@@ -14,27 +14,20 @@ void reset();
 
 void setup() {
     Serial.begin(9600);
-    pinMode(KBD_PIN, INPUT_PULLUP);
     ASSERT_RECOVERY();
-    while (!Serial);
-    Serial.println("Not in recovery!");
-    return;
+
+    pinMode(KBD_PIN, INPUT_PULLUP);
     enableInterrupt(KBD_PIN, onKeyDown, CHANGE);
-    enableInterrupt(RECOVERY_PIN, reset, CHANGE);
+    
+    // Enable generic keyboard interface
     Keyboard.begin();
+
+    // Consumer for media keys.
+    // See: https://github.com/NicoHood/HID/wiki/Consumer-API
+    Consumer.begin();
 }
 
 void loop() {}
-
-void reset() {
-    int val = digitalRead(RECOVERY_PIN);
-    if (val == HIGH)
-        return;
-    Keyboard.end();
-    disableInterrupt(RECOVERY_PIN | PINCHANGEINTERRUPT);
-    disableInterrupt(KBD_PIN | PINCHANGEINTERRUPT);
-    Serial.println("Keyboard detach");
-}
 
 void onKeyDown() {
     key keyNumber = readKey(KBD_PIN);
@@ -42,12 +35,31 @@ void onKeyDown() {
         return;
     }
 
+    // Define your keys here
     switch (keyNumber) {
       case MDKEY_1:
-        Keyboard.print("test");
+        Keyboard.add(KEY_LEFT_SHIFT);
+        Keyboard.add(KEY_LEFT_ALT);
+        Keyboard.send();
+        Keyboard.releaseAll();
         break;
       case MDKEY_2:
-        Keyboard.press(MEDIA_PLAY_PAUSE);
+        Keyboard.println("Hello World yobta!");
+        break;
+      case MDKEY_3:
+        Consumer.write(MEDIA_PLAY_PAUSE);
+        break;
+      case MDKEY_8:
+        Consumer.write(MEDIA_VOL_DOWN);
+        break;
+      case MDKEY_4:
+        Consumer.write(MEDIA_VOLUME_UP);
+        break;
+      case MDKEY_12:
+        Consumer.write(MEDIA_PREV);
+        break;
+      case MDKEY_16:
+        Consumer.write(MEDIA_NEXT);
         break;
       default:
         Serial.print("Unknown Key: ");
