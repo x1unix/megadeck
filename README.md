@@ -91,4 +91,4 @@ Use this mode to reflash the board in case:
 Good luck :)
 ```
 
-Now, start Arduino IDE and flash any other sketch to replace the SuperDeck firmware.
+Now, start Arduino IDE and flash any other sketch to replace the MegaDeck firmware.
