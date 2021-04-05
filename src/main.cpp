@@ -11,9 +11,7 @@
 unsigned long volatile previousMillis = 0;
 
 // Predefine functions
-bool isRecoveryMode();
 void onKeyDown();
-void reset();
 
 void setup() {
     Serial.begin(9600);
