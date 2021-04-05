@@ -93,3 +93,8 @@ Good luck :)
 ```
 
 Now, start Arduino IDE and flash any other sketch to replace the MegaDeck firmware.
+
+## Credits
+
+* [NicoHood's HID library](https://github.com/NicoHood/HID/wiki)
+* [EnableInterrupt library](https://github.com/GreyGnome/EnableInterrupt)
