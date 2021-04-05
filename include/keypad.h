@@ -2,13 +2,10 @@
 #define MEGADESK_MDKEYS_H
 #include <Arduino.h>
 
-// RobotDyn MDKEY 4x4 MDKEY Definitions.
-//
-// All MDKEY values are divided by 10 to get exact results.
-// Values are tested for Arduino Pro Micro, and will differ on other boards.
-
 typedef int key;
+key readKey(uint8_t pinNumber);
 
+// RobotDyn MDKEY 4x4 key Definitions.
 #define MDKEY_EMPTY 0x0
 #define MDKEY_1 0x1
 #define MDKEY_2 0x2
@@ -27,7 +24,8 @@ typedef int key;
 #define MDKEY_15 0xF
 #define MDKEY_16 0x10
 
-// Platform-specific keyboard button voltage values
+// Platform-specific keyboard button voltage values.
+// Will vary from board to board.
 #ifdef ARDUINO_ARCH_AVR
 #define MAX_ANALOG_VALUE 1023
 
@@ -50,7 +48,5 @@ typedef int key;
 #else
 #error Unsupported board, please add V_MAX_KEY values to "header/keypad.h"
 #endif
-
-key readKey(uint8_t pinNumber);
 
 #endif
