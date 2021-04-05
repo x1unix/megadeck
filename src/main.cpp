@@ -14,13 +14,14 @@ void reset();
 
 void setup() {
     Serial.begin(9600);
-    pinMode(RECOVERY_PIN, INPUT_PULLUP);
     pinMode(KBD_PIN, INPUT_PULLUP);
     ASSERT_RECOVERY();
-
+    while (!Serial);
+    Serial.println("Not in recovery!");
+    return;
     enableInterrupt(KBD_PIN, onKeyDown, CHANGE);
     enableInterrupt(RECOVERY_PIN, reset, CHANGE);
-    //Keyboard.begin();
+    Keyboard.begin();
 }
 
 void loop() {}
